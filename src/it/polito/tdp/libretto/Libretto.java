@@ -64,11 +64,51 @@ public class Libretto {
 	 * @return il {@link Voto}corrispondente,oppure {@code null} se non esistente
 	 */
 	public Voto cercaEsame(String nomeEsame) {
-		for(Voto v : this.voti) {
+		/*for(Voto v : this.voti) {
 			if(v.getCorso().equals(nomeEsame)) {
 				return v;
 			}
-		}
-		return null;
+		}*/
+		Voto voto = new Voto(0,nomeEsame,null);
+		int pos = this.voti.indexOf(voto);
+		//controlla solo il nome del corso,quindi non ci serve il voto e la data
+		
+		if(pos==-1)
+			return null;
+		else
+			return this.voti.get(pos);
 	}
+	
+	/* ****************** PUNTO 4 ****************** */
+	
+	/**
+	 * Dato un {@link Voto}, determina se esiste già un voto con uguale
+	 * corso ed uguale punteggio
+	 * @param v
+	 * @return {@code true},se ha trovato un corso e punteggio uguali, 
+	 * {@code false} se non ha trovato il corso oppure con voto diverso
+	 */
+	public boolean esisteGiaVoto(Voto v) {
+		
+		int pos = this.voti.indexOf(v);
+		if(pos==-1)
+			return false;
+		else 
+			return(v.getPunti()==this.voti.get(pos).getPunti());
+				
+		
+		/*Voto trovato = this.cercaEsame(v.getCorso());
+		if(trovato == null)
+			return false;
+		if(trovato.getPunti()==v.getPunti()) {
+			return true;
+		}
+		else {
+			return false;}*/
+		
+		}
+	
+	
+	
+	
 }
