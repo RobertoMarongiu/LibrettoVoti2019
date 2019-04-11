@@ -24,12 +24,13 @@ public class Libretto {
 	 * Aggiunge nuovo voto al libretto
 	 * @param v il (@link Voto) da aggiungere
 	 */
+	/*
 	public void add(Voto v) {
 		//metodo che delega la funzione
 		//se si dovesse modifica la classe voto con questo metodo non devo modificare la classe libretto
 		voti.add(v);
 	}
-	
+	*/
 	/* ****************** PUNTO 2 ****************** */
 	//tre casi che mi cercano i voti
 	
@@ -108,7 +109,42 @@ public class Libretto {
 		
 		}
 	
+	/* ****************** PUNTO 5 ****************** */
+	
+	/**
+	 * Mi dice se il {@link Voto} {@code v}è in conflitto con uno dei voti esistenti
+	 * Se il voto non esiste ,nonc'è conflitto.
+	 * Se il voto esiste ed ha un puntegio diverso,c'è conflitto.
+	 * @param v
+	 * @return {@code true}se il voto esiste ed ha un puntegio diverso,
+	 * 			{@code false}se il voto non esiste,oppure esiste ma ha lo stesso punteggio
+	 */
+	public boolean votoConflitto(Voto v) {
+		int pos = this.voti.indexOf(v);
+		if(pos==-1)
+			return false;
+		else 
+			return(v.getPunti() != this.voti.get(pos).getPunti());
+	}
 	
 	
+	/* ****************** PUNTO 6 ****************** */
+	/**
+	 * Aggiunge nuovo voto al libretto
+	 * @param v il (@link Voto) da aggiungere
+	 * @return {@code true}nel caso normale,
+	 * 			{@code false} se non è riuscito ad aggiugere il voto
+	 */
+	public boolean add(Voto v) {
+		if(!this.esisteGiaVoto(v) && !this.votoConflitto(v)) {
+			voti.add(v);
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
+	public String toString() {
+		return this.voti.toString();
+		}
 }
